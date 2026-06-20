@@ -28,11 +28,11 @@
                         🏪 Data Cabang
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                    <a href="{{ route('laporan.transaksi') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                         📊 Laporan Transaksi
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                    <a href="{{ route('laporan.stok') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                         📦 Laporan Stok
                     </a>
 
@@ -45,16 +45,19 @@
                         🏠 Dashboard
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                    <a href="{{ route('barangs.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                         📦 Data Barang
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                    <a href="{{ route('transaksis.create') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                         🧾 Transaksi
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
-                        📊 Laporan
+                    <a href="{{ route('laporan.stok') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📊 Laporan transaksi
+                    </a>
+                    <a href="{{ route('laporan.stok') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📦 Laporan Stok
                     </a>
                 @endrole
                 @role('gudang')
@@ -78,7 +81,7 @@
                         📤 Barang Keluar
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                    <a href="{{ route('laporan.stok') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                         📊 Laporan Stok
                     </a>
                 @endrole
@@ -93,6 +96,19 @@
 
                     <a href="{{ route('transaksis.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                         📜 Riwayat Transaksi
+                    </a>
+                @endrole
+                @role('supervisor')
+                    <a href="{{ route('supervisor.dashboard') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        🏠 Dashboard
+                    </a>
+
+                    <a href="{{ route('laporan.transaksi') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📊 Laporan Transaksi
+                    </a>
+
+                    <a href="{{ route('laporan.stok') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📦 Laporan Stok
                     </a>
                 @endrole
             </nav>

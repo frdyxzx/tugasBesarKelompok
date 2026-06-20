@@ -20,6 +20,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('barang-masuks', \App\Http\Controllers\BarangMasukController::class);
     Route::resource('barang-keluars', \App\Http\Controllers\BarangKeluarController::class);
     Route::resource('transaksis', \App\Http\Controllers\TransaksiController::class);
+    Route::get('/laporan/transaksi', [\App\Http\Controllers\LaporanTransaksiController::class, 'index'])
+    ->name('laporan.transaksi');
+    Route::get('/laporan/stok', [\App\Http\Controllers\LaporanStokController::class, 'index'])
+    ->name('laporan.stok');
+    Route::get('/laporan/transaksi/pdf', [\App\Http\Controllers\LaporanTransaksiController::class, 'cetakPdf'])
+    ->name('laporan.transaksi.pdf');
 
     Route::get('/owner/dashboard', function () {
 
@@ -48,7 +54,19 @@ Route::middleware(['auth'])->group(function () {
     })->name('manajer.dashboard');
 
     Route::get('/supervisor/dashboard', function () {
-        return view('supervisor.dashboard');
+
+        $totalTransaksi = \App\Models\Transaksi::count();
+
+        $totalPendapatan = \App\Models\Transaksi::sum('total_harga');
+
+        $barangTerjual = \App\Models\DetailTransaksi::sum('jumlah');
+
+        return view('supervisor.dashboard', compact(
+            'totalTransaksi',
+            'totalPendapatan',
+            'barangTerjual'
+        ));
+
     })->name('supervisor.dashboard');
 
     Route::get('/kasir/dashboard', function () {
