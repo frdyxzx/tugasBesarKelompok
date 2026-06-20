@@ -57,6 +57,44 @@
                         📊 Laporan
                     </a>
                 @endrole
+                @role('gudang')
+                    <a href="{{ route('gudang.dashboard') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        🏠 Dashboard
+                    </a>
+
+                    <a href="{{ route('kategoris.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        🏷️ Kategori Barang
+                    </a>
+
+                    <a href="{{ route('barangs.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📦 Data Barang
+                    </a>
+
+                    <a href="{{ route('barang-masuks.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📥 Barang Masuk
+                    </a>
+
+                    <a href="{{ route('barang-keluars.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📤 Barang Keluar
+                    </a>
+
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📊 Laporan Stok
+                    </a>
+                @endrole
+                @role('kasir')
+                    <a href="{{ route('kasir.dashboard') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        🏠 Dashboard
+                    </a>
+
+                    <a href="{{ route('transaksis.create') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        🧾 Transaksi
+                    </a>
+
+                    <a href="{{ route('transaksis.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                        📜 Riwayat Transaksi
+                    </a>
+                @endrole
             </nav>
         </aside>
 

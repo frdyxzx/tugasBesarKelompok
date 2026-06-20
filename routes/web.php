@@ -15,6 +15,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('cabangs', \App\Http\Controllers\CabangController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('barangs', \App\Http\Controllers\BarangController::class);
+    Route::resource('kategoris', \App\Http\Controllers\KategoriController::class);
+    Route::resource('barang-masuks', \App\Http\Controllers\BarangMasukController::class);
+    Route::resource('barang-keluars', \App\Http\Controllers\BarangKeluarController::class);
+    Route::resource('transaksis', \App\Http\Controllers\TransaksiController::class);
 
     Route::get('/owner/dashboard', function () {
 
@@ -47,11 +52,41 @@ Route::middleware(['auth'])->group(function () {
     })->name('supervisor.dashboard');
 
     Route::get('/kasir/dashboard', function () {
-        return view('kasir.dashboard');
+
+        $kasirId = \Illuminate\Support\Facades\Auth::id();
+
+        $totalTransaksi = \App\Models\Transaksi::where('user_id', $kasirId)->count();
+
+        $pendapatanHariIni = \App\Models\Transaksi::where('user_id', $kasirId)
+            ->whereDate('tanggal_transaksi', now()->format('Y-m-d'))
+            ->sum('total_harga');
+
+        $barangTerjual = \App\Models\DetailTransaksi::whereHas('transaksi', function ($query) use ($kasirId) {
+            $query->where('user_id', $kasirId);
+        })->sum('jumlah');
+
+        return view('kasir.dashboard', compact(
+            'totalTransaksi',
+            'pendapatanHariIni',
+            'barangTerjual'
+        ));
+
     })->name('kasir.dashboard');
 
     Route::get('/gudang/dashboard', function () {
-        return view('gudang.dashboard');
+
+        $totalBarang = \App\Models\Barang::count();
+        $totalBarangMasuk = \App\Models\BarangMasuk::count();
+        $totalBarangKeluar = \App\Models\BarangKeluar::count();
+        $stokMenipis = \App\Models\Barang::where('stok', '<=', 5)->count();
+
+        return view('gudang.dashboard', compact(
+            'totalBarang',
+            'totalBarangMasuk',
+            'totalBarangKeluar',
+            'stokMenipis'
+        ));
+
     })->name('gudang.dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
