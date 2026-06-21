@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cabang extends Model
 {
     protected $fillable = [
-        'cabang_id',
-        'name',
-        'email',
-        'password',
+        'nama_cabang',
+        'kota',
+        'alamat',
+        'telepon',
     ];
 }
